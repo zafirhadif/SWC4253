@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public-head" :: public-head/>
+<body class="  text-center text-black ">
+<div class="w-100 h-100 ">
+    <div class="cover-container d-flex w-100 h-500 p-3 mx-auto flex-column">
+        <header th:replace="public-nav :: public-nav"></header>
+        <main class="px-3">
+            <br>
+            <br>
+            <h1 class="title">KaraokeCheck Booking Management System</h1>
+            <p sec:authorize="!hasRole('ADMIN') and isAuthenticated()">Welcome,
+                [[${#request.userPrincipal.principal.fullName}]].</p>
+            <p sec:authorize="hasRole('ADMIN')">Welcome, Admin.</p>
+            <br>
+            <div>
+                <img src="/images/2.png" style="width:330px;height:480px;margin:0px;">
+            </div>
+            <h1 class="roomtype">Room Type</h1>
+            <br>
+            <img class="mySlides" src="/images/room1.jpeg" style="max-width:1100px; justify-content: center;
+  align-items: center;">
+            <img class="mySlides" src="/images/room2.jpeg" style="max-width:1100px; justify-content: center;
+  align-items: center;">
+            <img class="mySlides" src="/images/room3.jpeg" style="max-width:1100px; justify-content: center;
+  align-items: center;">
+            <img class="mySlides" src="/images/room4.jpeg" style="max-width:1100px; justify-content: center;
+  align-items: center;">
+            <img class="mySlides" src="/images/room5.jpeg" style="max-width:1100px; justify-content: center;
+  align-items: center;">
+            <br><br>
+            <h1>Contact Us For Booking</h1>
+            <p>Phone Number: 017-769 0628 ZAFIR HADIF</p>
+        </main>
+        <footer th:replace="public-footer :: public-footer"></footer>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script>
+    var slideIndex = 0;
+    carousel();
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) {slideIndex = 1} x[slideIndex-1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+</script>
+<style>
+    h1.title {
+        font-family: baskerville,serif;
+        font-size: 55px;
+    }
+    h1.roomtype {
+        font-family: bradly hand,cursive;
+        font-size: 50px;
+    }
+    div.gallery {
+        margin: 7px; border: 1px solid #ccc; float: left; width: 209px;
+    }
+    div.gallery:hover {
+        border: 1px solid #777;
+    }
+    div.gallery img {
+        width: 100%;
+        height: auto;
+    }
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }
+</style>

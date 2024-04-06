@@ -1,0 +1,51 @@
+<header class="mb-auto " th:fragment="public-nav"  style="border-bottom: 2px solid black;">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha384-X1MjFjxCV+1+CSxhJdgrKT8hpdbT2Wr9+7a7n7N6uQCfChAKZVuBBOlOyC6jA7bu" crossorigin="anonymous">
+    <div>
+        <br>
+        <h3 class="float-md-start mb-2" style="color: black">KaraokeCheck</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a th:classappend="${#httpServletRequest.getRequestURI() == '/'? 'active':''}" class="nav-link"
+               aria-current="page" th:href="@{/}">
+                <i class="fa fa-home" aria-hidden="true"></i> Home
+            </a>
+            <a sec:authorize="hasRole('ADMIN')"
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/student') and!#httpServletRequest.getRequestURI().contains('/admin')? 'active':''}"
+               class="nav-link" th:href="@{/student}">
+                <i class="fa fa-users" aria-hidden="true"></i> Customer
+            </a>
+            <a sec:authorize="isAuthenticated()"
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/subject') and!#httpServletRequest.getRequestURI().contains('/admin')? 'active':''}"
+               class="nav-link" th:href="@{/subject}">
+                <i class="fa fa-microphone" aria-hidden="true"></i> Room
+            </a>
+            <a sec:authorize="isAnonymous()"
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/login') or #httpServletRequest.getRequestURI().contains('/register')? 'active':''}"
+               class="nav-link"
+               th:href="@{/login}">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+            </a>
+            <a sec:authorize="hasRole('ADMIN')"
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/student')? 'active':''}"
+               class="nav-link" th:href="@{/admin/student}">
+                <i class="fa fa-user-plus" aria-hidden="true"></i> Manage Customer
+            </a>
+
+            <a sec:authorize="hasRole('ADMIN')"
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/subject')? 'active':''}"
+               class="nav-link" th:href="@{/admin/subject}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Manage Room
+            </a>
+
+            <a th:classappend="${#httpServletRequest.getRequestURI().contains('/calculate') and!#httpServletRequest.getRequestURI().contains('/admin')? 'active':''}"
+               class="nav-link" th:href="@{/calculate}">
+                <i class="fa fa-calculator" aria-hidden="true"></i> Calculator
+            </a>
+            <a sec:authorize="isAuthenticated()"
+               th:classappend="${#httpServletRequest.getRequestURI() == '/logout'? 'active':''}" class="nav-link"
+               th:href="@{/logout}">
+                <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+            </a>
+        </nav>
+    </div>
+</header>
